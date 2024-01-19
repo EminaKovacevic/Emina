@@ -1,0 +1,29 @@
+<?xml version='1.0'?>
+<DevRes>
+	<Images>
+		<Res id="add" path="Work/CPProjects/SiS_v_Zadnji/res/Icons/Add48.png"/>
+		<Res id="mvLeft" path="Work/CPProjects/SiS_v_Zadnji/res/Icons/arrow_left.png"/>
+		<Res id="mvRight" path="Work/CPProjects/SiS_v_Zadnji/res/Icons/arrow_right.png"/>
+		<Res id="rem" path="Work/CPProjects/SiS_v_Zadnji/res/Icons/Del64.png"/>
+		<Res id="remAll" path="Work/CPProjects/SiS_v_Zadnji/res/Icons/delete48.png"/>
+		<Res id="ETF" path = "Work/CPProjects/SiS_v_Zadnji/res/Icons/UNSA/ETF_Logo.png"/>
+		<Res id="UNSA" path = "Work/CPProjects/SiS_v_Zadnji/res/Icons/UNSA/UNSA_Logo.png"/>
+		<Res id="Home" path = "Work/CPProjects/SiS_v_Zadnji/res/Icons/Traditional-HomeXL.png"/>
+		<Res id="TransCost" path = "Work/CPProjects/SiS_v_Zadnji/res/Icons/transportCostXL.png"/>
+
+		<Res id="imgAttendance" path = "Work/CPProjects/SiS_v_Zadnji/res/Icons/imgAttendance.jpg"/>
+		<Res id="imgSubject" path = "Work/CPProjects/SiS_v_Zadnji/res/Icons/imgSubject.png"/>
+		<Res id="imgActivity" path = "Work/CPProjects/SiS_v_Zadnji/res/Icons/imgActivity.png"/>
+		
+		<Res id="complex" path = "Work/CPProjects/SiS_v_Zadnji/res/Icons/bh_flag.png"/>
+		<Res id="pencil" path = "Work/CPProjects/SiS_v_Zadnji/res/Icons/update64.png"/>
+		<Res id="plus" path = "Work/CPProjects/SiS_v_Zadnji/res/Icons/add48.png"/>
+		<Res id="scroll" path = "Work/CPProjects/SiS_v_Zadnji/res/Icons/Assortment64.png"/>
+		<Res id="table" path = "Work/CPProjects/SiS_v_Zadnji/res/Icons/connOK.png"/>
+		<Res id="horiz" path = "Work/CPProjects/SiS_v_Zadnji/res/Icons/Sestar64.png"/>
+		<Res id="vert" path = "Work/CPProjects/SiS_v_Zadnji/res/Icons/SettingsBlue48.png"/>
+		<Res id="standard" path = "Work/CPProjects/SiS_v_Zadnji/res/Icons/Sync_ON64.png"/>
+		<Res id="navigator" path = "Work/CPProjects/SiS_v_Zadnji/res/Icons/time.png"/>
+	</Images>
+	
+</DevRes>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Memo layout="vertical" designWidth="170" dY="0" height="22">
+	<Line lineWidth="0.2" lineStyle="solid" x="0" y="0.2" width="170" height="0" hScale="1"/>
+	<Row y="0" height="30">
+		<Text hAlign="right" vAlign="center" font="PageFoot" x="0" y="3" width="190" height="4" name="#Page"/>
+	</Row>	
+</Memo>

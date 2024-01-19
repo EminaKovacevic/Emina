@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DevRes>
+	<Translations>
+		<Res id="Pos" tr="Rbr"/>
+		
+		<Res id="ime" tr="Ime"/>
+		<Res id="prezime" tr="Prezime"/>
+		<Res id="indeks" tr="Indeks"/>
+		<Res id="NameAktivnosti" tr="Vrsta provjere"/>
+		<Res id="Grade" tr="Ocjena"/>
+
+        
+        <!--Prijave na nastavu-->
+        <Res id="Date" tr="Datum: "/>
+        <Res id="Day" tr="Dan: "/>
+        <Res id="Time" tr="Vrijeme: "/>
+        <Res id="Absent" tr="Studenti koji nisu prijavljeni niti na jedan termin"/>
+        
+	</Translations>
+</DevRes>
