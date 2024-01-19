@@ -112,7 +112,7 @@ void ViewTasks::populateData()
         _pDS = nullptr;
         return;
     }
-    _table.init(_pDS, { 1,2,4 });
+    _table.init(_pDS, { 4,1,2 });
 }
 void ViewTasks::SetCurrentSubject() {
     dp::IStatementPtr pSelect = dp::getMainDatabase()->createStatement("SELECT Naziv_Predmeta FROM Predmet WHERE ID_Predmeta = ?");
@@ -162,14 +162,13 @@ bool ViewTasks::onChangedSelection(gui::TableEdit* pTE) {
 
         /*_Aktivnost.setValue(val);*/
 
-        val = row[0];
+        val = row[1];
         _dateB.setValue(val);
 
-        val = row[1];
+        val = row[2];
         _timeB.setValue(val);
 
-        val = row[7];
-        td::Variant var;
+        val = row[3];
         _type.setValue(val);
 
         return true;

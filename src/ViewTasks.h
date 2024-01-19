@@ -57,7 +57,7 @@ protected:
     dp::IDatabase* _db;
     gui::GridLayout _gl;
     dp::IDataSetPtr _pDS;
-    //::INT4 _ActivityID;
+    td::INT4 _ActivityID;
     td::INT4 _SubjectID;
     cnt::PushBackVector <td::String> _attachedFiles;
     ///*td::string8 _nazivakt;*/
