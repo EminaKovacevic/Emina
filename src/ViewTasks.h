@@ -75,8 +75,8 @@ protected:
     bool onClick(gui::Button* pBtn);
     bool saveData();
     bool canAdd();
-    bool eraseDateTime();
-    bool insertDateTime();
+    bool eraseTasks();
+    bool insertTasks();
     void SetCurrentSubject();
     void SetActivityName(td::Variant& val, td::INT4 br);
     td::INT4 getIDfromTable(int rowID);

@@ -246,10 +246,10 @@ td::INT4 ViewTasks::findMaxID()
 bool  ViewTasks::saveData()
 {
     dp::Transaction tran(_db);
-    if (!eraseDateTime())
+    if (!eraseTasks())
         return false;
 
-    if (!insertDateTime())
+    if (!insertTasks())
         return false;
 
     if (tran.commit())
@@ -305,7 +305,7 @@ bool ViewTasks::canAdd()
     return true;
 }
 
-bool ViewTasks::eraseDateTime()
+bool ViewTasks::eraseTasks()
 
 {
     td::INT4 id;
@@ -327,15 +327,22 @@ bool ViewTasks::eraseDateTime()
     return true;
 }
 
-bool ViewTasks::insertDateTime()
+bool ViewTasks::insertTasks()
 {
-    dp::IStatementPtr pInsertCourseP(_db->createStatement("insert into Rokovi (ID_Roka, ID_Aktivnosti, Datum_Pocetka, Vrijeme_Pocetka, Datum_Kraja, Vrijeme_Kraja,Datum_Prijave, Vrijeme_Prijave,ID_Predmeta) values (?,?,?,?,?,?,?,?,?)"));
-    dp::Params pParams2(pInsertCourseP->allocParams());
-    td::INT4 id_roka, id_akt, id_pred;
-    td::Date datump, datumk, datumf;
-    td::Time vrijemep, vrijemek, vrijemef;
+    dp::IStatementPtr pSelect = dp::getMainDatabase()->createStatement("SELECT COALESCE(MAX(ID), 0) as id FROM OpenPredaja");
+    dp::Columns pCols = pSelect->allocBindColumns(1);
+    td::INT4 id;
+    pCols << "id" << id;
+    pSelect->execute();
+    pSelect->moveNext();
 
-    pParams2 << id_roka << id_akt << datump << vrijemep << datumk << vrijemek << datumf << vrijemef << id_pred;
+    dp::IStatementPtr pInsertCourseP(_db->createStatement("insert into OpenPredaja (ID, Datum_Predaje, Vrijeme_Predaje, ID_Aktivnosti) values (?,?,?,?)"));
+    dp::Params pParams2(pInsertCourseP->allocParams());
+    td::INT4 id_akt;
+    td::Date datump;
+    td::Time vrijemep;
+    id++;
+    pParams2 << id << datump << vrijemep << id_akt;
 
     dp::IDataSet* pDS = _table.getDataSet();
     auto rowCnt = pDS->getNumberOfRows();
@@ -343,32 +350,18 @@ bool ViewTasks::insertDateTime()
     {
 
         auto& row = pDS->getRow(iRow);
-        id_roka = row[6].i4Val();
+        /*id_roka = row[6].i4Val();
         if (std::find(_itemsToInsert.begin(), _itemsToInsert.end(), id_roka) == _itemsToInsert.end())
-            continue;
+            continue;*/
 
         td::Variant val;
 
-        datump = row[0];
+        datump = row[1];
 
 
-        vrijemep = row[1];
+        vrijemep = row[2];
 
-        datumk = row[2];
-
-
-        vrijemek = row[3];
-
-
-        datumf = row[4];
-
-        vrijemef = row[5];
-
-
-
-        id_pred = _SubjectID;
-
-        val = row[7];
+        val = row[3];
 
         id_akt = val.i4Val();
 
