@@ -10,8 +10,6 @@
 //#include "Globals.h"
 
 
-
-
 ViewTasks::ViewTasks(td::INT4 SubjectID) :
     _db(dp::getMainDatabase()),
     _LblActName(tr("Activity")),
