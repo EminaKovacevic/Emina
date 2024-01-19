@@ -112,7 +112,7 @@ void ViewTasks::populateData()
         _pDS = nullptr;
         return;
     }
-    _table.init(_pDS, { 4,1,2,3 });
+    _table.init(_pDS, {4,1,2});
 }
 void ViewTasks::SetCurrentSubject() {
     dp::IStatementPtr pSelect = dp::getMainDatabase()->createStatement("SELECT Naziv_Predmeta FROM Predmet WHERE ID_Predmeta = ?");
