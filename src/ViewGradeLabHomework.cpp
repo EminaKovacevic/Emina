@@ -132,7 +132,7 @@ void ViewGradeLabHomework::populateData()
 		_pDS = nullptr;
 		return;
 	}
-	_table.init(_pDS, { 4,5,3,2,6 });
+	_table.init(_pDS, { 4,5,3,2,6,1 });
 }
 
 bool ViewGradeLabHomework::onChangedSelection(gui::TableEdit* pTE)
@@ -488,8 +488,8 @@ bool ViewGradeLabHomework::loadComboBox(td::String select, gui::DBComboBox& comb
 	td::INT4 id;
 	td::Date d;
 	td::Time t;
-	td::Date dnow;
-	td::Time tnow;
+	td::Date dnow(true);
+	td::Time tnow(true);
 
 	pCols << "ID" << id << "Name" << name<<"d"<<d<<"t"<<t;
 	if (!pSelect->execute())
@@ -497,8 +497,11 @@ bool ViewGradeLabHomework::loadComboBox(td::String select, gui::DBComboBox& comb
 
 	while (pSelect->moveNext())
 	{
-		if(dnow<d||(dnow==d&&tnow<t))  
-		combo.addItem(name, id);
+		if(dnow>d)  
+			combo.addItem(name, id);
+		else if(dnow == d && tnow > t)
+			combo.addItem(name, id);
+
 	}
 	//combo.selectIndex(0, );
 	return true;
