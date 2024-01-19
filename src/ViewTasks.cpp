@@ -181,10 +181,10 @@ void ViewTasks::populateDSRow(dp::IDataSet::Row& row, td::INT4 i)
 {
     td::Variant val;
     _dateB.getValue(val);
-    row[0].setValue(val);
+    row[1].setValue(val);
 
     _timeB.getValue(val);
-    row[1].setValue(val);
+    row[2].setValue(val);
 
     td::Variant x = i;
     row[6].setValue(x);
@@ -307,7 +307,7 @@ bool ViewTasks::eraseTasks()
 
 {
     td::INT4 id;
-    dp::IStatementPtr pDeleteItem(_db->createStatement("DELETE from Rokovi where ID_Roka=?"));
+    dp::IStatementPtr pDeleteItem(_db->createStatement("DELETE from OpenPredaja where ID=?"));
     dp::Params pParams2(pDeleteItem->allocParams());
     pParams2 << id;
 
