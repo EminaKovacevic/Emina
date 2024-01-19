@@ -13,8 +13,8 @@
 ViewTasks::ViewTasks(td::INT4 SubjectID) :
     _db(dp::getMainDatabase()),
     _LblActName(tr("Activity")),
-    _LblDateBegin(tr("ActivityDateB")),
-    _LblTimeBegin(tr("ActivityTimeB")),
+    _LblDateBegin(tr("ActivityDateP")),
+    _LblTimeBegin(tr("ActivityTimeP")),
     _lblType(tr("ActivityNameForDateTime")),
     _type(td::int4),
     _lblCName(tr("Course:")),
@@ -69,7 +69,7 @@ ViewTasks::ViewTasks(td::INT4 SubjectID) :
 
     gui::View::setLayout(&_gl);
     populateData();
-    loadComboBox("select ID_Aktivnosti as ID, Naziv_Aktivnosti as Naziv From Aktivnosti where Tip_Aktivnosti=1 and ID_Predmeta=?", _type);
+    loadComboBox("select ID_Aktivnosti as ID, Naziv_Aktivnosti as Naziv From Aktivnosti where Tip_Aktivnosti IN(2, 5) and ID_Predmeta=?", _type);
 
     /* if (_pDS->getNumberOfRows())
      {
