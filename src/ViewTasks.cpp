@@ -98,23 +98,21 @@ bool ViewTasks::loadComboBox(td::String select, gui::DBComboBox& combo)
 void ViewTasks::populateData()
 {
     auto pDB = dp::getMainDatabase();
-    _pDS = pDB->createDataSet("SELECT a.Datum_Pocetka AS datumb,a.Vrijeme_Pocetka AS vrijemeb, a.Datum_Kraja AS datume, a.Vrijeme_Kraja AS vrijemee, a.Datum_Prijave AS datumf, a.Vrijeme_Prijave AS vrijemef,a.ID_Roka,a.ID_Aktivnosti,a.ID_Predmeta, b.Naziv_Aktivnosti FROM Rokovi a, Aktivnosti b where a.ID_Predmeta=? and b.Tip_Aktivnosti=1 and a.ID_Predmeta = b.ID_Predmeta and a.ID_Aktivnosti=b.ID_Aktivnosti", dp::IDataSet::Execution::EX_MULT);
+    _pDS = pDB->createDataSet("select a.ID, a.Datum_Predaje, a.Vrijeme_Predaje, a.ID_Aktivnosti, b.Naziv_Aktivnosti  from OpenPredaja a, Aktivnosti b where a.ID_Aktivnosti=b.ID_Aktivnosti and b.Tip_Aktivnosti IN(2, 5) and b.ID_Predmeta=?", dp::IDataSet::Execution::EX_MULT);
 
     dp::Params parDS(_pDS->allocParams());
-    //td::INT4 IDPredmeta = Globals::_IDSubjectSelection;
-
-    //u parDS ce se ucitavati Globals::CurrentActivity
     parDS << _SubjectID;
     td::String Predmet;
-    dp::DSColumns cols(_pDS->allocBindColumns(10));
-    cols << "datumb" << td::date << "vrijemeb" << td::time << "datume" << td::date << "vrijemee" << td::time << "datumf" << td::date << "vrijemef" << td::time << "ID_Roka" << td::int4 << "ID_Aktivnosti" << td::int4 << "ID_Predmeta" << td::int4 << "Naziv_Aktivnosti" << td::string8;
 
+    dp::DSColumns cols(_pDS->allocBindColumns(5));
+    cols << "ID" << td::int4 << "Datum_Predaje" << td::date << "Vrijeme_Predaje" << td::time << "ID_Aktivnosti" << td::int4 << "Naziv_Aktivnosti" << td::string8;
+  
     if (!_pDS->execute())
     {
         _pDS = nullptr;
         return;
     }
-    _table.init(_pDS, { 9, 0, 1, 2, 3, 4 ,5, 6 });
+    _table.init(_pDS, { 1,2,4 });
 }
 void ViewTasks::SetCurrentSubject() {
     dp::IStatementPtr pSelect = dp::getMainDatabase()->createStatement("SELECT Naziv_Predmeta FROM Predmet WHERE ID_Predmeta = ?");
