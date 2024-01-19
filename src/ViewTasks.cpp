@@ -186,24 +186,22 @@ void ViewTasks::populateDSRow(dp::IDataSet::Row& row, td::INT4 i)
     row[2].setValue(val);
 
     td::Variant x = i;
-    row[6].setValue(x);
+    row[0].setValue(x);
 
     /*val = _ActivityID;*/
     /*row[7].setValue(val);*/
 
-    val = _SubjectID;
-    row[8].setValue(val);
     td::Variant var;
     _type.getValue(val);
-    row[7].setValue(val);
+    row[3].setValue(val);
     td::INT4 a = val.i4Val();
     SetActivityName(var, a);
-    row[9].setValue(var);
+    row[4].setValue(var);
 
 }
 td::INT4 ViewTasks::findMaxID()
 {
-    dp::IStatementPtr pSelect = dp::getMainDatabase()->createStatement("select ifnull(max(ID_Roka), 0) as maxid from Rokovi");
+    dp::IStatementPtr pSelect = dp::getMainDatabase()->createStatement("select ifnull(max(ID), 0) as maxid from OpenPredaja");
     dp::Columns pColumns = pSelect->allocBindColumns(1);
     td::INT4 maxID;
     pColumns << "maxid" << maxID;
@@ -326,19 +324,19 @@ bool ViewTasks::eraseTasks()
 
 bool ViewTasks::insertTasks()
 {
-    dp::IStatementPtr pSelect = dp::getMainDatabase()->createStatement("SELECT COALESCE(MAX(ID), 0) as id FROM OpenPredaja");
-    dp::Columns pCols = pSelect->allocBindColumns(1);
-    td::INT4 id;
-    pCols << "id" << id;
-    pSelect->execute();
-    pSelect->moveNext();
+    //dp::IStatementPtr pSelect = dp::getMainDatabase()->createStatement("SELECT COALESCE(MAX(ID), 0) as id FROM OpenPredaja");
+    //dp::Columns pCols = pSelect->allocBindColumns(1);
+    //td::INT4 id;
+    //pCols << "id" << id;
+    //pSelect->execute();
+    //pSelect->moveNext();
 
     dp::IStatementPtr pInsertCourseP(_db->createStatement("insert into OpenPredaja (ID, Datum_Predaje, Vrijeme_Predaje, ID_Aktivnosti) values (?,?,?,?)"));
     dp::Params pParams2(pInsertCourseP->allocParams());
-    td::INT4 id_akt;
+    td::INT4 id_akt, id;
     td::Date datump;
     td::Time vrijemep;
-    id++;
+  //  id++;
     pParams2 << id << datump << vrijemep << id_akt;
 
     dp::IDataSet* pDS = _table.getDataSet();
@@ -347,9 +345,9 @@ bool ViewTasks::insertTasks()
     {
 
         auto& row = pDS->getRow(iRow);
-        /*id_roka = row[6].i4Val();
-        if (std::find(_itemsToInsert.begin(), _itemsToInsert.end(), id_roka) == _itemsToInsert.end())
-            continue;*/
+        id = row[0].i4Val();
+        if (std::find(_itemsToInsert.begin(), _itemsToInsert.end(), id) == _itemsToInsert.end())
+            continue;
 
         td::Variant val;
 
@@ -415,8 +413,8 @@ bool ViewTasks::onClick(gui::Button* pBtn)
         return true;
     }
     if (pBtn == &_btnSave) {
-        sendDocs();
-        _attachedFiles.clean();
+       // sendDocs();
+      //  _attachedFiles.clean();
         showYesNoQuestionAsync(QuestionIDDDAAAA::Saveee, this, tr("alert"), tr("saveSure"), tr("Yes"), tr("No"));
 
         return true;
@@ -439,7 +437,7 @@ td::INT4 ViewTasks::getIDfromTable(int rowID)
 {
     dp::IDataSet* pDS = _table.getDataSet();
     auto& row = pDS->getRow(rowID);
-    return row[6].i4Val();
+    return row[0].i4Val();
 }
 
 
